@@ -15,7 +15,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class PreviewCV extends AppCompatActivity {
 
     ImageView ivProfilePic;
-    TextView tvName,tvEmail,tvPhoneNo;
+    TextView tvName,tvEmail,tvPhoneNo,tvSummary,tvEducation,tvExperience,tvCert,tvRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +34,11 @@ public class PreviewCV extends AppCompatActivity {
         String name=i.getStringExtra("name");
         String email=i.getStringExtra("email");
         String phoneNo=i.getStringExtra("phoneNo");
+        String summary=i.getStringExtra("summary");
+        String education=i.getStringExtra("education");
+        String experience=i.getStringExtra("experience");
+        String cert=i.getStringExtra("cert");
+        String ref=i.getStringExtra("ref");
         if (i.hasExtra("image"))
         {
             String img=i.getStringExtra("image");
@@ -56,6 +61,26 @@ public class PreviewCV extends AppCompatActivity {
         {
             tvPhoneNo.setText(phoneNo);
         }
+        if(summary!=null && !summary.isEmpty())
+        {
+            tvSummary.setText(summary);
+        }
+        if(education!=null && !education.isEmpty())
+        {
+            tvEducation.setText(education);
+        }
+        if(experience!=null && !experience.isEmpty())
+        {
+            tvExperience.setText(experience);
+        }
+        if(cert!=null && !cert.isEmpty())
+        {
+            tvCert.setText(cert);
+        }
+        if(ref!=null && !ref.isEmpty())
+        {
+            tvRef.setText(ref);
+        }
     }
     private void init()
     {
@@ -63,5 +88,10 @@ public class PreviewCV extends AppCompatActivity {
         tvName=findViewById(R.id.tvName);
         tvEmail=findViewById(R.id.tvEmail);
         tvPhoneNo=findViewById(R.id.tvPhoneNo);
+        tvSummary=findViewById(R.id.tvSummary);
+        tvEducation=findViewById(R.id.tvEducation);
+        tvExperience=findViewById(R.id.tvExperience);
+        tvCert=findViewById(R.id.tvCert);
+        tvRef=findViewById(R.id.tvRef);
     }
 }

@@ -18,11 +18,15 @@ import androidx.core.view.WindowInsetsCompat;
 public class HomeScreen extends AppCompatActivity {
     ImageView ivProfilePicture;
     Button btnProfilePic,btnPersonalDetails,btnSummary,btnEducation,btnExperience,btnCertifications,btnReferences,btnPreview;
-    String name,email,phoneNo,summary;
+    String name,email,phoneNo,summary,education,experience,cert,ref;
     Uri image;
     ActivityResultLauncher<Intent> getImageLauncher;
     ActivityResultLauncher<Intent> getPersonalDetailsLauncher;
     ActivityResultLauncher<Intent> getSummaryLauncher;
+    ActivityResultLauncher<Intent> getEducationLauncher;
+    ActivityResultLauncher<Intent> getExperienceLauncher;
+    ActivityResultLauncher<Intent> getCertLauncher;
+    ActivityResultLauncher<Intent> getRefLauncher;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,29 @@ public class HomeScreen extends AppCompatActivity {
             getSummaryLauncher.launch(i);
         });
 
+        btnEducation.setOnClickListener((v)->{
+            Intent i=new Intent(this, Education.class);
+            i.putExtra("education",education);
+            getEducationLauncher.launch(i);
+        });
+
+        btnExperience.setOnClickListener((v)->{
+            Intent i=new Intent(this, Experience.class);
+            i.putExtra("experience",experience);
+            getExperienceLauncher.launch(i);
+        });
+
+        btnCertifications.setOnClickListener((v)->{
+            Intent i=new Intent(this, Cert.class);
+            i.putExtra("cert",cert);
+            getCertLauncher.launch(i);
+        });
+
+        btnReferences.setOnClickListener((v)->{
+            Intent i=new Intent(this, Ref.class);
+            i.putExtra("ref",ref);
+            getRefLauncher.launch(i);
+        });
 
         btnPreview.setOnClickListener((v)->{
             Intent i=new Intent(this, PreviewCV.class);
@@ -62,6 +89,11 @@ public class HomeScreen extends AppCompatActivity {
             i.putExtra("name",name);
             i.putExtra("email",email);
             i.putExtra("phoneNo",phoneNo);
+            i.putExtra("summary",summary);
+            i.putExtra("education",education);
+            i.putExtra("experience",experience);
+            i.putExtra("cert",cert);
+            i.putExtra("ref",ref);
             startActivity(i);
         });
     }
@@ -113,6 +145,54 @@ public class HomeScreen extends AppCompatActivity {
                     {
                         Intent dataIntent=result.getData();
                         summary=dataIntent.getStringExtra("summary");
+                    }
+                });
+        getEducationLauncher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                (result)->{
+                    if (result.getResultCode()==RESULT_CANCELED)
+                    {
+                        Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (result.getResultCode()==RESULT_OK && result.getData()!=null)
+                    {
+                        Intent dataIntent=result.getData();
+                        education=dataIntent.getStringExtra("education");
+                    }
+                });
+        getExperienceLauncher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                (result)->{
+                    if (result.getResultCode()==RESULT_CANCELED)
+                    {
+                        Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (result.getResultCode()==RESULT_OK && result.getData()!=null)
+                    {
+                        Intent dataIntent=result.getData();
+                        experience=dataIntent.getStringExtra("experience");
+                    }
+                });
+        getCertLauncher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                (result)->{
+                    if (result.getResultCode()==RESULT_CANCELED)
+                    {
+                        Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (result.getResultCode()==RESULT_OK && result.getData()!=null)
+                    {
+                        Intent dataIntent=result.getData();
+                        cert=dataIntent.getStringExtra("cert");
+                    }
+                });
+        getRefLauncher=registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                (result)->{
+                    if (result.getResultCode()==RESULT_CANCELED)
+                    {
+                        Toast.makeText(this, "Cancelled", Toast.LENGTH_SHORT).show();
+                    }
+                    else if (result.getResultCode()==RESULT_OK && result.getData()!=null)
+                    {
+                        Intent dataIntent=result.getData();
+                        ref=dataIntent.getStringExtra("ref");
                     }
                 });
     }
